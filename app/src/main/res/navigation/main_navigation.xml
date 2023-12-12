@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/homeOfflineFragment"
-        android:name="com.example.adabiyotmanzili.Fragments.HomeOfflineFragment"
+        android:name="com.example.adabiyotmanzili.fragments.HomeOfflineFragment"
         android:label="fragment_home_offline"
         tools:layout="@layout/fragment_home_offline" />
     <fragment
         android:id="@+id/homeOnlineFragment"
-        android:name="com.example.adabiyotmanzili.Fragments.HomeOnlineFragment"
+        android:name="com.example.adabiyotmanzili.fragments.HomeOnlineFragment"
         android:label="fragment_home_online"
         tools:layout="@layout/fragment_home_online" />
 </navigation>

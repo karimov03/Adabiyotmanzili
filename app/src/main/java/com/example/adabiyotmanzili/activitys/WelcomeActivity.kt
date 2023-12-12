@@ -1,10 +1,9 @@
-package com.example.adabiyotmanzili.Activitys
+package com.example.adabiyotmanzili.activitys
 
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat

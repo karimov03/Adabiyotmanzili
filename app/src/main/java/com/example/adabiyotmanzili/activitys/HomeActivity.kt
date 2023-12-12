@@ -1,10 +1,9 @@
-package com.example.adabiyotmanzili.Activitys
+package com.example.adabiyotmanzili.activitys
 
 import android.content.Context
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.Network
-import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

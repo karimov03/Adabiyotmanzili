@@ -25,6 +25,7 @@ class OfflineAdapter(val context: Context, val list:ArrayList<OfflineFile>) :Rec
         book.thumbnail?.let {
             holder.itemDownloadBookBinding.imageBook.setImageBitmap(it)
         } ?: run {
+            // If no thumbnail is available, you can set a default image or hide the ImageView
             holder.itemDownloadBookBinding.imageBook.setImageResource(R.drawable.image_book)
         }
 
