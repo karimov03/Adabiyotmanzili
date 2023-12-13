@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".activitys.HomeActivity">
+    tools:context=".Activitys.HomeActivity">
 
     <fragment
         android:id="@+id/my_navigation_host"
@@ -22,103 +22,168 @@
         app:navGraph="@navigation/main_navigation" />
 
     <LinearLayout
+        android:id="@+id/view_online"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:visibility="gone"
+        android:background="#64DD17"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Yana onlayndasiz"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_offline"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="Siz oflayndasiz"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/card_style"
+            android:backgroundTint="#3350F3">
+
+            <TextView
+                android:id="@+id/open_downloads"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:gravity="center"
+                android:text="Yuklamalarni ochish"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="83dp"
-        android:paddingBottom="34dp"
+        android:background="@color/white"
+        android:paddingBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintStart_toStartOf="parent">
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
             android:id="@+id/btn_home"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/ic_home"/>
+                android:src="@drawable/ic_home" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:text="Tavsiyalar"
+                android:layout_weight="3"
                 android:gravity="center"
+                android:text="Tavsiyalar"
                 android:textColor="#8E2912"
-                android:layout_weight="3"/>
+                android:textSize="10sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btn_book"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/btn_book"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/ic_book_light"/>
+                android:src="@drawable/ic_book_light" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:text="Tavsiyalar"
+                android:layout_weight="3"
                 android:gravity="center"
+                android:text="Tavsiyalar"
                 android:textColor="#514D4C"
-                android:layout_weight="3"/>
+                android:textSize="10sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btn_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/btn_search"
-            >
+            android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/ic_search_light" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:text="Tavsiyalar"
+                android:layout_weight="3"
                 android:gravity="center"
+                android:text="Tavsiyalar"
                 android:textColor="#514D4C"
-                android:layout_weight="3"/>
+                android:textSize="10sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btn_user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/btn_user"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/ic_user_light"/>
+                android:src="@drawable/ic_user_light" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:text="Tavsiyalar"
+                android:layout_weight="3"
                 android:gravity="center"
+                android:text="Tavsiyalar"
                 android:textColor="#514D4C"
-                android:layout_weight="3"/>
+                android:textSize="10sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

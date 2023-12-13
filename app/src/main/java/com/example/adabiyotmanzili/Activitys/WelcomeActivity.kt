@@ -1,4 +1,4 @@
-package com.example.adabiyotmanzili.activitys
+package com.example.adabiyotmanzili.Activitys
 
 import android.content.Intent
 import android.os.Build

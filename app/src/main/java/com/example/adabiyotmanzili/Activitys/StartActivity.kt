@@ -1,4 +1,4 @@
-package com.example.adabiyotmanzili.activitys
+package com.example.adabiyotmanzili.Activitys
 
 import android.content.Intent
 import android.os.Build
@@ -21,22 +21,22 @@ class StartActivity : AppCompatActivity() {
         //
         val startThread=Thread(){
             Thread.sleep(1500)
-            val intent = Intent(this,WelcomeActivity::class.java)
+            val intent = Intent(this@StartActivity,WelcomeActivity::class.java)
             startActivity(intent)
         }
         startThread.start()
 
     }
-    private fun setStatusBarColor(colorResId: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.statusBarColor = ContextCompat.getColor(this, colorResId)
+        private fun setStatusBarColor(colorResId: Int) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.statusBarColor = ContextCompat.getColor(this, colorResId)
+            }
         }
-    }
-    private fun setStatusBarIconsColor(colorResId: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val window = window
-            window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
-                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        private fun setStatusBarIconsColor(colorResId: Int) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val window = window
+                window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
         }
-    }
 }
