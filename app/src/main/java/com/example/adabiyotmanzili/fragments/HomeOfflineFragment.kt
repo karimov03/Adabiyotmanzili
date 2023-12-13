@@ -24,6 +24,7 @@ import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import com.example.adabiyotmanzili.Activitys.HomeActivity
 import com.example.adabiyotmanzili.Activitys.WelcomeActivity
 import com.example.adabiyotmanzili.Adapters.OfflineAdapter
 import com.example.adabiyotmanzili.R
@@ -49,7 +50,9 @@ class HomeOfflineFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        val homeActivity = requireActivity() as HomeActivity
+        homeActivity.updateHomeView()
+        homeActivity.hideOfflineView()
         binding.btnAudioKitoblar.setOnClickListener {
             Toast.makeText(
                 requireContext(),

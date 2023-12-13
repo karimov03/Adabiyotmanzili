@@ -1,5 +1,6 @@
 package com.example.adabiyotmanzili.Activitys
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.IntentFilter
 import android.graphics.Color
@@ -33,22 +34,36 @@ class HomeActivity : AppCompatActivity() {
         override fun onAvailable(network: Network) {
             super.onAvailable(network)
             booleanInternet = true
-            GlobalScope.launch(Dispatchers.Main) {
-                val navController = findNavController(R.id.my_navigation_host)
-                val currentDestination = navController.currentDestination
-                val fragmentName = currentDestination?.label.toString()
+            val navController = findNavController(R.id.my_navigation_host)
 
-                if (fragmentName == "fragment_home_offline") {
+            GlobalScope.launch(Dispatchers.Main) {
+                if (binding.viewOffline.visibility == View.VISIBLE) {
+                    binding.viewOffline.visibility = View.GONE
 
                     binding.viewOnline.visibility = View.VISIBLE
                     binding.viewOffline.visibility = View.GONE
 
                     delay(1000)
                     navController.navigate(R.id.homeOnlineFragment)
-                    delay(1500)
+                    delay(2000)
                     binding.viewOnline.visibility = View.GONE
-                }
 
+                } else {
+                    val currentDestination = navController.currentDestination
+                    val fragmentName = currentDestination?.label.toString()
+
+                    if (fragmentName != "fragment_home_online") {
+
+                        binding.viewOnline.visibility = View.VISIBLE
+                        binding.viewOffline.visibility = View.GONE
+
+                        delay(1000)
+                        navController.navigate(R.id.homeOnlineFragment)
+                        delay(2000)
+                        binding.viewOnline.visibility = View.GONE
+                    }
+
+                }
             }
 
         }
@@ -62,8 +77,7 @@ class HomeActivity : AppCompatActivity() {
                 val currentDestination = navController.currentDestination
                 val fragmentName = currentDestination?.label.toString()
 
-                if (fragmentName == "fragment_home_online") {
-
+                if (fragmentName != "fragment_home_offline") {
                     binding.viewOnline.visibility = View.GONE
                     binding.viewOffline.visibility = View.VISIBLE
 
@@ -98,7 +112,18 @@ class HomeActivity : AppCompatActivity() {
 
         binding.openDownloads.setOnClickListener {
             if (navController.currentDestination?.id != R.id.homeOfflineFragment || navController.currentDestination?.id != R.id.homeOnlineFragment) {
-                setButtonColors(binding.btnHome)
+                binding.apply {
+                    homeImage.setImageResource(R.drawable.ic_home)
+                    homeName.setTextColor(Color.parseColor("#8E2912"))
+
+
+                    bookImage.setImageResource(R.drawable.ic_book_light)
+                    bookName.setTextColor(Color.parseColor("#000000"))
+                    userImage.setImageResource(R.drawable.ic_user_light)
+                    userName.setTextColor(Color.parseColor("#000000"))
+                    searchImage.setImageResource(R.drawable.ic_search_light)
+                    searchText.setTextColor(Color.parseColor("#000000"))
+                }
                 navController.popBackStack()
                 BooleanFragment()
             }
@@ -106,8 +131,19 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.btnHome.setOnClickListener {
-            if (navController.currentDestination?.id != R.id.homeOfflineFragment || navController.currentDestination?.id != R.id.homeOnlineFragment) {
-                setButtonColors(binding.btnHome)
+            if (navController.currentDestination?.id != R.id.homeOfflineFragment ) {
+                binding.apply {
+                    homeImage.setImageResource(R.drawable.ic_home)
+                    homeName.setTextColor(Color.parseColor("#8E2912"))
+
+
+                    bookImage.setImageResource(R.drawable.ic_book_light)
+                    bookName.setTextColor(Color.parseColor("#000000"))
+                    userImage.setImageResource(R.drawable.ic_user_light)
+                    userName.setTextColor(Color.parseColor("#000000"))
+                    searchImage.setImageResource(R.drawable.ic_search_light)
+                    searchText.setTextColor(Color.parseColor("#000000"))
+                }
                 navController.popBackStack()
                 BooleanFragment()
             }
@@ -115,7 +151,18 @@ class HomeActivity : AppCompatActivity() {
 
         binding.btnBook.setOnClickListener {
             if (navController.currentDestination?.id != R.id.bookFragment) {
-                setButtonColors(binding.btnBook)
+                binding.apply {
+                    bookImage.setImageResource(R.drawable.ic_book_dark)
+                    bookName.setTextColor(Color.parseColor("#8E2912"))
+
+
+                    userImage.setImageResource(R.drawable.ic_user_light)
+                    userName.setTextColor(Color.parseColor("#000000"))
+                    homeImage.setImageResource(R.drawable.ic_home_light)
+                    homeName.setTextColor(Color.parseColor("#000000"))
+                    searchImage.setImageResource(R.drawable.ic_search_light)
+                    searchText.setTextColor(Color.parseColor("#000000"))
+                }
                 navController.popBackStack()
                 navController.navigate(R.id.bookFragment)
             }
@@ -123,7 +170,18 @@ class HomeActivity : AppCompatActivity() {
 
         binding.btnSearch.setOnClickListener {
             if (navController.currentDestination?.id != R.id.searchFragment) {
-                setButtonColors(binding.btnSearch)
+                binding.apply {
+                    searchImage.setImageResource(R.drawable.ic_search_dark)
+                    searchText.setTextColor(Color.parseColor("#8E2912"))
+
+
+                    userImage.setImageResource(R.drawable.ic_user_light)
+                    userName.setTextColor(Color.parseColor("#000000"))
+                    homeImage.setImageResource(R.drawable.ic_home_light)
+                    homeName.setTextColor(Color.parseColor("#000000"))
+                    bookImage.setImageResource(R.drawable.ic_book_light)
+                    bookName.setTextColor(Color.parseColor("#000000"))
+                }
                 navController.popBackStack()
                 navController.navigate(R.id.searchFragment)
             }
@@ -131,7 +189,18 @@ class HomeActivity : AppCompatActivity() {
 
         binding.btnUser.setOnClickListener {
             if (navController.currentDestination?.id != R.id.userFragment) {
-                setButtonColors(binding.btnUser)
+                binding.apply {
+                    userImage.setImageResource(R.drawable.ic_user_dark)
+                    userName.setTextColor(Color.parseColor("#8E2912"))
+
+
+                    homeImage.setImageResource(R.drawable.ic_home_light)
+                    homeName.setTextColor(Color.parseColor("#000000"))
+                    bookImage.setImageResource(R.drawable.ic_book_light)
+                    bookName.setTextColor(Color.parseColor("#000000"))
+                    searchImage.setImageResource(R.drawable.ic_search_light)
+                    searchText.setTextColor(Color.parseColor("#000000"))
+                }
                 navController.popBackStack()
                 navController.navigate(R.id.userFragment)
             }
@@ -165,20 +234,24 @@ class HomeActivity : AppCompatActivity() {
             navController.navigate(R.id.homeOfflineFragment)
         }
     }
-
-    private fun setButtonColors(selectedButton: View) {
-        val buttons = listOf(
-            binding.btnHome,
-            binding.btnBook,
-            binding.btnSearch,
-            binding.btnUser
-        )
-
-        buttons.forEach { button ->
-            button.setBackgroundColor(
-                if (button == selectedButton) Color.parseColor("#69A6F9")
-                else Color.parseColor("#FFFFFF")
-            )
-        }
+    fun updateHomeView() {
+        binding.homeImage.setImageResource(R.drawable.ic_home)
+        binding.homeName.setTextColor(Color.parseColor("#8E2912"))
     }
+    fun updateBookView() {
+        binding.bookImage.setImageResource(R.drawable.ic_book_light)
+        binding.bookName.setTextColor(Color.parseColor("#000000"))
+    }
+    fun updateSearchView() {
+        binding.searchImage.setImageResource(R.drawable.ic_search_light)
+        binding.searchText.setTextColor(Color.parseColor("#000000"))
+    }
+    fun updateUserView() {
+        binding.userImage.setImageResource(R.drawable.ic_user_light)
+        binding.userName.setTextColor(Color.parseColor("#000000"))
+    }
+    fun hideOfflineView(){
+        binding.viewOffline.visibility=View.GONE
+    }
+
 }
