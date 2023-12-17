@@ -40,4 +40,19 @@
         android:name="com.example.adabiyotmanzili.Activitys.WelcomeActivity"
         android:label="activity_welcome"
         tools:layout="@layout/activity_welcome" />
+    <activity
+        android:id="@+id/homeOfflineActivity"
+        android:name="com.example.adabiyotmanzili.Activitys.HomeOfflineActivity"
+        android:label="activity_home_offline"
+        tools:layout="@layout/activity_home_offline" />
+    <fragment
+        android:id="@+id/bookListFragment"
+        android:name="com.example.adabiyotmanzili.fragments.BookListFragment"
+        android:label="fragment_book_list"
+        tools:layout="@layout/fragment_book_list" />
+    <activity
+        android:id="@+id/readingBookActivity"
+        android:name="com.example.adabiyotmanzili.Activitys.ReadingBookActivity"
+        android:label="activity_reading_book"
+        tools:layout="@layout/activity_reading_book" />
 </navigation>

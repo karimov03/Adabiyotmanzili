@@ -45,7 +45,6 @@ dependencies {
 
     // pdf view
     implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
-//    // status bar uchun
 //    implementation ("com.readystatesoftware.systembartint:systembartint:0.9.4")
 
     implementation("androidx.core:core-ktx:1.12.0")

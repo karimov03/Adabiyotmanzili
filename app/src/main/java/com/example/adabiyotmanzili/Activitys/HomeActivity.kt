@@ -2,6 +2,7 @@ package com.example.adabiyotmanzili.Activitys
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
 import android.net.ConnectivityManager
@@ -9,6 +10,7 @@ import android.net.Network
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -16,7 +18,9 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import com.example.adabiyotmanzili.R
 import com.example.adabiyotmanzili.databinding.ActivityHomeBinding
+import com.example.adabiyotmanzili.models.BooleanInternet
 import com.example.adabiyotmanzili.models.ConnectivityReceiver
+import com.example.adabiyotmanzili.models.ReadingBook
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -29,11 +33,13 @@ class HomeActivity : AppCompatActivity() {
         getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
             super.onAvailable(network)
             booleanInternet = true
+            BooleanInternet.internet=true
             val navController = findNavController(R.id.my_navigation_host)
 
             GlobalScope.launch(Dispatchers.Main) {
@@ -45,6 +51,8 @@ class HomeActivity : AppCompatActivity() {
 
                     delay(1000)
                     navController.navigate(R.id.homeOnlineFragment)
+                    binding.btnHome.performClick()
+
                     delay(2000)
                     binding.viewOnline.visibility = View.GONE
 
@@ -59,6 +67,8 @@ class HomeActivity : AppCompatActivity() {
 
                         delay(1000)
                         navController.navigate(R.id.homeOnlineFragment)
+                        binding.btnHome.performClick()
+
                         delay(2000)
                         binding.viewOnline.visibility = View.GONE
                     }
@@ -71,6 +81,7 @@ class HomeActivity : AppCompatActivity() {
         override fun onLost(network: Network) {
             super.onLost(network)
             booleanInternet = false
+            BooleanInternet.internet=false
 
             GlobalScope.launch(Dispatchers.Main) {
                 val navController = findNavController(R.id.my_navigation_host)
@@ -85,12 +96,17 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
+
     private val binding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
     override fun onStart() {
         super.onStart()
         BooleanFragment()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.btnHome.performClick()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -111,6 +127,9 @@ class HomeActivity : AppCompatActivity() {
         val navController = findNavController(R.id.my_navigation_host)
 
         binding.openDownloads.setOnClickListener {
+            val intent= Intent(this@HomeActivity,ReadingBookActivity::class.java)
+            startActivity(intent)
+
             if (navController.currentDestination?.id != R.id.homeOfflineFragment || navController.currentDestination?.id != R.id.homeOnlineFragment) {
                 binding.apply {
                     homeImage.setImageResource(R.drawable.ic_home)
@@ -209,6 +228,12 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor = sharedPreferences.edit()
+        editor.putString("BoolAdapter", "")
+        editor.apply()
         unregisterReceiver(connectivityReceiver)
     }
 
@@ -253,5 +278,9 @@ class HomeActivity : AppCompatActivity() {
     fun hideOfflineView(){
         binding.viewOffline.visibility=View.GONE
     }
+    fun UpdateOflineView(){
+        binding.viewOffline.visibility=View.VISIBLE
+    }
+
 
 }

@@ -4,27 +4,41 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.util.convertByteToUUID
 import com.example.adabiyotmanzili.R
 import com.example.adabiyotmanzili.databinding.ItemDownloadBookBinding
 import com.example.adabiyotmanzili.models.OfflineFile
 
-class OfflineAdapter(val context: Context, var list: List<OfflineFile>) :
-    RecyclerView.Adapter<OfflineAdapter.vh>() {
+class OfflineAdapter(
+    private val context: Context,
+    private var fileList: List<OfflineFile>,
+    private val rvAction: RvAction
+) : RecyclerView.Adapter<OfflineAdapter.ViewHolder>() {
 
-    class vh(val itemDownloadBookBinding: ItemDownloadBookBinding) :
-        RecyclerView.ViewHolder(itemDownloadBookBinding.root) {
+    inner class ViewHolder(private val itemBinding: ItemDownloadBookBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(book: OfflineFile) {
-            itemDownloadBookBinding.bookName.text = book.file_name
-            itemDownloadBookBinding.bookAfterName.text = (book.file_size!! /(1024*1024)).toFloat().toString()+" mb"
-            itemDownloadBookBinding.imageBook.setImageResource(R.drawable.image_book)
+            itemBinding.bookName.text = book.file_name
+            itemBinding.bookAfterName.text = "%.2f MB".format(book.file_size.toFloat()!! / (1024 * 1024))
+            // Agar thumbnail     mavjud bo'lsa, uningni o'rnatamiz
+            if (book.file_thumpnail != null) {
+                itemBinding.imageBook.setImageBitmap(book.file_thumpnail)
+            } else {
+                // Agar thumbnail bo'sh bo'lsa, default rasmni o'rnatamiz
+                itemBinding.imageBook.setImageResource(R.drawable.image_book)
+            }
 
+            // Itemga click bo'lganda
+            itemBinding.root.setOnClickListener {
+                rvAction.OnRootClick(fileList, adapterPosition)
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): vh {
-        return vh(
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
             ItemDownloadBookBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -33,12 +47,13 @@ class OfflineAdapter(val context: Context, var list: List<OfflineFile>) :
         )
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = fileList.size
 
-
-    override fun onBindViewHolder(holder: vh, position: Int) {
-        holder.bind(list[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(fileList[position])
     }
 
-
+    interface RvAction {
+        fun OnRootClick(list: List<OfflineFile>, position: Int)
+    }
 }
