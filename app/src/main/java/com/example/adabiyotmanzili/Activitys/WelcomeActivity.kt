@@ -49,6 +49,10 @@ class WelcomeActivity : AppCompatActivity() {
         if (!doubleBackPressed) {
             Toast.makeText(this, "Chiqish uchun ikki marta bosing", Toast.LENGTH_SHORT).show()
             doubleBackPressed = true
+            Thread{
+                Thread.sleep(2000)
+                doubleBackPressed = false
+            }.start()
         } else {
             finishAffinity()
             super.onBackPressed()

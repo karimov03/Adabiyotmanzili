@@ -39,13 +39,19 @@ android {
 }
 
 dependencies {
-// gifImage view
+    // gifImage view
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.22")
     implementation ("com.google.code.gson:gson:2.8.8")
-
     // pdf view
     implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
-//    implementation ("com.readystatesoftware.systembartint:systembartint:0.9.4")
+    // retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    //Picasso
+    implementation ("com.squareup.picasso:picasso:2.71828")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

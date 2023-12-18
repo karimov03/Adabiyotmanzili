@@ -40,31 +40,33 @@ class StartActivity : AppCompatActivity() {
 
         //
 
-        val startThread=Thread(){
-            Thread.sleep(1500)
-            val intent = Intent(this@StartActivity,WelcomeActivity::class.java)
+        val startThread = Thread() {
+            Thread.sleep(1600)
+            val intent = Intent(this@StartActivity, WelcomeActivity::class.java)
             startActivity(intent)
         }
         startThread.start()
 
     }
 
-        private fun setStatusBarColor(colorResId: Int) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.statusBarColor = ContextCompat.getColor(this, colorResId)
-            }
+    private fun setStatusBarColor(colorResId: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = ContextCompat.getColor(this, colorResId)
         }
-        private fun setStatusBarIconsColor(colorResId: Int) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                val window = window
-                window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
-                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            }
+    }
+
+    private fun setStatusBarIconsColor(colorResId: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val window = window
+            window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
+                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
+    }
 
 
     private fun getOrCreateGetBooksFolder() {
-        val downloadsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+        val downloadsDirectory =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val getBooksFolder = File(downloadsDirectory, "GetBooks")
 
         if (!getBooksFolder.exists()) {
@@ -81,7 +83,10 @@ class StartActivity : AppCompatActivity() {
     private fun createGetBooksFolderQ(getBooksFolder: File) {
         val resolver: ContentResolver = contentResolver
         val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/GetBooks")
+            put(
+                MediaStore.MediaColumns.RELATIVE_PATH,
+                Environment.DIRECTORY_DOWNLOADS + "/GetBooks"
+            )
             put(MediaStore.MediaColumns.IS_PENDING, 1)
         }
 
@@ -106,6 +111,12 @@ class StartActivity : AppCompatActivity() {
                 ).show()
             }
         }
+    }
+
+    override fun onBackPressed() {
+        finish()
+        finishAffinity()
+        super.onBackPressed()
     }
 
 
